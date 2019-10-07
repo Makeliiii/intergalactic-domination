@@ -18,9 +18,6 @@ const userSchema = new Schema({
         required: true,
         trim: true,
         minlength: 6
-    },
-    date: {
-        type: Date
     }
 })
 
