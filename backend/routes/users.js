@@ -1,4 +1,6 @@
 const router = require('express').Router()
+
+// Models
 let User = require('../models/users.models')
 let UserSession = require('../models/userSession.models')
 
@@ -9,14 +11,20 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
-    const username = req.body.username
-    const password = req.body.password
+    const { username, password } = req.body
 
-    const newUser = new User({ username, password })
+    User.findOne({ username: username })
+        .then(user => {
+            if (user) {
+                console.log('User already exists')
+            } else {
+                const newUser = new User({ username, password })
 
-    newUser.save()
-        .then(() => res.json('User added'))
-        .catch(err => res.status(400).json('Error: ' + err))
+                newUser.save()
+                    .then(() => res.json('User added'))
+                    .catch(err => res.status(400).json('Error: ' + err))
+            }
+        })
 })
 
 router.route('/login').post((req, res) => {
@@ -38,16 +46,26 @@ router.route('/login').post((req, res) => {
         }
 
         const user = users[0]
-        if (!user.comparePasswords(password)) {
+        if (!user.comparePassword(password)) {
             return res.send({
                 success: false
             })
         }
 
         newUserSession.userId = user._id
-        newUserSession.save()
-            .then(() => res.json('User session added'))
-            .catch(err => res.status(400).json('Error: ' + err))
+        newUserSession.save((err, doc) => {
+            if (err) {
+                console.log(err)
+                return res.send({
+                    success: false
+                })
+            }
+
+            return res.send({
+                success: true,
+                token: doc._id
+            })
+        })
     })
 })
 

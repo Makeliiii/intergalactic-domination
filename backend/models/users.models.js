@@ -18,6 +18,10 @@ const userSchema = new Schema({
         required: true,
         trim: true,
         minlength: 6
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 
@@ -44,11 +48,11 @@ userSchema.pre('save', function(next) {
 })
 
 // password verification
-userSchema.methods.comparePassword = (candidatePassword, cb) => {
-    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-        if (err) return cb(err)
-        cb(null, isMatch)
-    })
+userSchema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) return cb(err);
+        cb(null, isMatch);
+    });
 }
 
 const User = mongoose.model('User', userSchema)
