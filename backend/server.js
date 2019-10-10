@@ -1,31 +1,33 @@
-// import important things
 const express = require('express')
-const cors = require('cors')
 const mongoose = require('mongoose')
+const passport = require('passport')
+const cors = require('cors')
 
-require('dotenv').config()
+const users = require('./routes/api/users')
 
-// make an object of express
 const app = express()
-const port = process.env.PORT || 5000
 
-// cross-origin resource sharing and body parser
+// Enable Cross-origin resource sharing
 app.use(cors())
 app.use(express.json())
 
-// uri and some flags to deal with some updates to mongodb
-const uri = process.env.ATLAS_URI
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, () => {
-    console.log('Connected to the database')
-})
+// Bodyparser middleware
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
-// gotta get that users route...
-const usersRouter = require('./routes/users')
+// DB config
+const db = require('./config/keys').mongoURI
 
-// ...and use it
-app.use('/users', usersRouter)
+// MongoDB connection
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('Connected to the DB'))
 
-// launch the server
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`)
-})
+// Passport middleware
+app.use(passport.initialize())
+
+// Passport config
+require('./config/passport')
+
+// Routes
+app.use('/api/users', users)
+
+app.listen(5000, () => console.log('Server listening on port 5000'))

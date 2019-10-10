@@ -14,7 +14,7 @@ class SignIn extends Component {
         }
 
         // bind handleSubmit to `this`
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSignIn = this.handleSignIn.bind(this)
     }
 
     // form validation
@@ -34,7 +34,7 @@ class SignIn extends Component {
     }
 
     // handleSubmit that sends a request to the api
-    handleSubmit(e) {
+    handleSignIn(e) {
         e.preventDefault()
 
         if (this.handleValidation()) {
@@ -102,14 +102,14 @@ class SignIn extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSignIn}>
                     <label>
                         <input type="text" placeholder="Username" value={this.state.username} onChange={e => {this.setState({ username: e.target.value })}} />
                     </label>
                     <label>
                         <input type="password" placeholder="Password" value={this.state.password} onChange={e => {this.setState({ password: e.target.value })}} />
                     </label>
-                    <input type="submit" value="Submit" onClick={e => this.handleSubmit(e)} />
+                    <input type="submit" value="Submit" onClick={e => this.handleSignIn(e)} />
                 </form>
             </div>
         )
