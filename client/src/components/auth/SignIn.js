@@ -35,7 +35,7 @@ class SignIn extends Component {
         e.preventDefault()
 
         if (this.handleValidation()) {
-            const url = "http://localhost:5000/users/login"
+            const url = "http://localhost:5000/api/users/login"
 
             this.setState({ isLoading: true })
 
@@ -53,7 +53,7 @@ class SignIn extends Component {
             .then(json => {
                 console.log('json', json)
                 if (json.success) {
-                    setInStorage('Car_charging_app', { token: json.token })
+                    setInStorage('Token', { token: json.token })
                     this.setState({
                         isLoading: false,
                         username: '',
@@ -65,33 +65,6 @@ class SignIn extends Component {
                         isLoading: false
                     })
                 }
-            })
-        }
-    }
-
-    componentDidMount() {
-        const obj = getFromStorage('Car_charging_app')
-        if (obj && obj.token) {
-            const { token } = obj
-
-            // Verify token
-            fetch('http://localhost:5000/users/verify?token=' + token)
-                .then(res => res.json())
-                .then(json => {
-                    if (json.success) {
-                        this.setState({
-                            token,
-                            isLoading: false
-                        })
-                    } else {
-                        this.setState({
-                            isLoading: false
-                        })
-                    }
-                })
-        } else {
-            this.setState({
-                isLoading: false
             })
         }
     }
