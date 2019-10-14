@@ -1,14 +1,16 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
-import SignUp from './components/SignUp'
-import SignIn from './components/SignIn'
+import SignUp from './components/auth/SignUp'
+import SignIn from './components/auth/SignIn'
+import Landing from './components/Landing'
 
 function App() {
   return (
     <div className="App">
-        <SignUp />
-        <SignIn />
+        <Route exact path='/' component={ Landing } />
+        <Route path='/register' component={ SignUp } />
+        <Route path='/signin' component={ SignIn } />
     </div>
   )
 }

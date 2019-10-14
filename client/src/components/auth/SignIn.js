@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import {
-    setInStorage,
-    getFromStorage
-} from '../utils/storage'
+import { setInStorage, getFromStorage } from '../../utils/storage'
 
 class SignIn extends Component {
     constructor(props) {
