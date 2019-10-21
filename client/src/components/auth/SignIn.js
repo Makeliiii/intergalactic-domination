@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { setInStorage, getFromStorage } from '../../utils/storage'
 
 class SignIn extends Component {
@@ -7,7 +8,8 @@ class SignIn extends Component {
         this.state = {
             username: "",
             password: "",
-            isLoading: false
+            isLoading: false,
+            isAuthenticated: false
         }
 
         // bind handleSubmit to `this`
@@ -53,12 +55,13 @@ class SignIn extends Component {
             .then(json => {
                 console.log('json', json)
                 if (json.success) {
-                    setInStorage('Token', { token: json.token })
+                    setInStorage('Token', json.token )
                     this.setState({
                         isLoading: false,
                         username: '',
                         password: '',
-                        token: json.token
+                        token: json.token,
+                        isAuthenticated: true
                     })
                 } else {
                     this.setState({
@@ -70,6 +73,10 @@ class SignIn extends Component {
     }
     
     render() {
+        if (this.state.isAuthenticated) {
+            return <Redirect to='/' />
+        }
+
         return (
             <div>
                 <form onSubmit={this.handleSignIn}>

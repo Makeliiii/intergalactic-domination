@@ -4,6 +4,7 @@ const passport = require('passport')
 const cors = require('cors')
 
 const users = require('./routes/api/users')
+const chargers = require('./routes/api/chargers')
 
 const app = express()
 
@@ -29,5 +30,6 @@ require('./config/passport')
 
 // Routes
 app.use('/api/users', users)
+app.use('/api/chargers', chargers)
 
 app.listen(5000, () => console.log('Server listening on port 5000'))
