@@ -16,6 +16,12 @@ class Landing extends Component {
                         Sign In
                     </button>
                 </Link>
+
+                <Link to='/map'>
+                    <button>
+                        Chargers
+                    </button>
+                </Link>
             </div>
         )
     }
