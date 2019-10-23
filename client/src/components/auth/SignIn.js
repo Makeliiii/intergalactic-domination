@@ -37,7 +37,7 @@ class SignIn extends Component {
         e.preventDefault()
 
         if (this.handleValidation()) {
-            const url = "http://localhost:5000/api/users/login"
+            const url = "http://34.239.125.70/api/users/login"
 
             this.setState({ isLoading: true })
 
@@ -74,7 +74,7 @@ class SignIn extends Component {
     
     render() {
         if (this.state.isAuthenticated) {
-            return <Redirect to='/' />
+            return <Redirect to='/map' />
         }
 
         return (

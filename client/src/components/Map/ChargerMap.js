@@ -21,7 +21,7 @@ class ChargerMap extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/api/chargers/get')
+        fetch('http://34.239.125.70/api/chargers/get')
             .then(res => res.json())
             .then(data => {
                 this.setState({ data: data })
@@ -45,7 +45,7 @@ class ChargerMap extends Component {
                 name={marker.name}
                 location={marker.location}
                 type={marker.type}
-                inUse={marker.inUse ? "Yes" : "No"}
+                inUse={marker.inUse ? "Available" : "Taken"}
                 position={{
                     lat: marker.latitude.$numberDecimal,
                     lng: marker.longitude.$numberDecimal
@@ -83,7 +83,7 @@ class ChargerMap extends Component {
                             <h2>{this.state.selectedPlace.name}</h2>
                             <p>Location: {this.state.selectedPlace.location}</p>
                             <p>Type: {this.state.selectedPlace.type}</p>
-                            <p>In Use: {this.state.selectedPlace.inUse}</p>
+                            <p>Status: {this.state.selectedPlace.inUse}</p>
                     </InfoWindow>
                 </Map>
 

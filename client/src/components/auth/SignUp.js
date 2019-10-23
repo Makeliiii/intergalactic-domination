@@ -41,7 +41,7 @@ class SignUp extends Component {
         e.preventDefault()
 
         if (this.handleValidation()) {
-            const url = "http://localhost:5000/api/users/register"
+            const url = "http://34.239.125.70/api/users/register"
 
             this.setState({ isLoading: true })
 

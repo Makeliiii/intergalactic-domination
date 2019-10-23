@@ -55,7 +55,7 @@ class MapSearch extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/api/chargers/get')
+        fetch('http://34.239.125.70/api/chargers/get')
             .then(res => res.json())
             .then(data => {
                 const { query } = this.state
