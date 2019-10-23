@@ -1,3 +1,23 @@
 body {
     margin: 0
 }
+
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    justify-items: right;
+}
+
+#form {
+    justify-items: right;
+    justify-content: right;
+    float: right;
+    margin-left: 70%;
+    z-index: 100000;
+}
+
+#form ul {
+    list-style: none;
+    padding: 0;
+}

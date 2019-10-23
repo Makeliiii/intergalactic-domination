@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 class SignUp extends Component {
     constructor(props) {
@@ -7,7 +8,8 @@ class SignUp extends Component {
             username: "",
             password: "",
             passwordConfirm: "",
-            isLoading: false
+            isLoading: false,
+            registerSuccess: false
         }
 
         // bind handleSubmit to `this`
@@ -56,11 +58,16 @@ class SignUp extends Component {
             .then(res => res.json())
             .then(json => {
                 console.log('json', json)
+                this.setState({ registerSuccess: true })
             })
         }
     }
     
     render() {
+        if (this.state.registerSuccess) {
+            return <Redirect to='/signin' />
+        }
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>

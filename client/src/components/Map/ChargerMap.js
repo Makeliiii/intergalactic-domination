@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react'
+
+import MapSearch from './MapSearch'
+
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
+
 
 class ChargerMap extends Component {
     constructor(props) {
@@ -63,24 +67,28 @@ class ChargerMap extends Component {
         }
 
         return (
-            <Map
-                google={ this.props.google }
-                zoom={ 6 }
-                style={mapStyles}
-                initialCenter={{ lat: 64.00, lng: 26.50 }}
-                onClick={this.onMapClick} >
-                
-                {this.markers()}
+            <div id='container'>
+                <Map
+                    google={ this.props.google }
+                    zoom={ 6 }
+                    style={mapStyles}
+                    initialCenter={{ lat: 64.00, lng: 26.50 }}
+                    onClick={this.onMapClick} >
+                    
+                    {this.markers()}
 
-                <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}>
-                        <h2>{this.state.selectedPlace.name}</h2>
-                        <p>Location: {this.state.selectedPlace.location}</p>
-                        <p>Type: {this.state.selectedPlace.type}</p>
-                        <p>In Use: {this.state.selectedPlace.inUse}</p>
-                </InfoWindow>
-            </Map>
+                    <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}>
+                            <h2>{this.state.selectedPlace.name}</h2>
+                            <p>Location: {this.state.selectedPlace.location}</p>
+                            <p>Type: {this.state.selectedPlace.type}</p>
+                            <p>In Use: {this.state.selectedPlace.inUse}</p>
+                    </InfoWindow>
+                </Map>
+
+                <MapSearch />
+            </div>
         )
     }
 }

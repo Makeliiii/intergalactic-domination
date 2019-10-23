@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import Landing from './components/Landing'
-import ChargerMap from './components/ChargerMap'
+import ChargerMap from './components/Map/ChargerMap'
 
 function App() {
   return (
