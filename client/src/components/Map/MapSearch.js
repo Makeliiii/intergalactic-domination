@@ -10,6 +10,7 @@ class MapSearch extends Component {
             filteredData: [],
         }
 
+        // bind functions
         this.handleSelectChange = this.handleSelectChange.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
         this.listItems = this.listItems.bind(this)
@@ -19,9 +20,11 @@ class MapSearch extends Component {
         this.setState({value: e.target.value})
     }
 
+    // checks the input and filters the list accordingly
     handleInputChange(e) {
         const query = e.target.value
 
+        // filter the list by charger name
         if (this.state.value === "name") {
             this.setState(prevState => {
                 const filteredData = prevState.data.filter(element => {
@@ -34,6 +37,8 @@ class MapSearch extends Component {
                 }
             })
         }
+        
+        // filter the list by location/city name
         if (this.state.value === "location") {
             this.setState(prevState => {
                 const filteredData = prevState.data.filter(element => {
@@ -48,6 +53,7 @@ class MapSearch extends Component {
         }
     }
 
+    // return the list items using map()
     listItems() {
         return this.state.filteredData.map((charger, index) => {
             return <li 
@@ -56,6 +62,7 @@ class MapSearch extends Component {
         })
     }
 
+    // fetch the charger data
     componentDidMount() {
         fetch('http://34.239.125.70/api/chargers/get')
             .then(res => res.json())

@@ -12,7 +12,7 @@ class SignIn extends Component {
             isAuthenticated: false
         }
 
-        // bind handleSubmit to `this`
+        // bind functions
         this.handleSignIn = this.handleSignIn.bind(this)
     }
 

@@ -12,7 +12,7 @@ class SignUp extends Component {
             registerSuccess: false
         }
 
-        // bind handleSubmit to `this`
+        // bind functions
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 

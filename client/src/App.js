@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
+// import components
 import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import Landing from './components/Landing'

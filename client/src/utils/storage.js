@@ -1,3 +1,4 @@
+// Get the key from local storage
 export function getFromStorage(key) {
     if (!key) {
         return null
@@ -15,6 +16,7 @@ export function getFromStorage(key) {
     }
 }
 
+// Store the key into local storage
 export function setInStorage(key, obj) {
     if (!key) {
         console.log('Error: Key is missing')

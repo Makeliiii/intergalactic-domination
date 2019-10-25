@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-// User Schema
+// Charger Schema
 const ChargerSchema = new Schema({
     name: {
         type: String,

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react'
 
+// import children
 import MapSearch from './MapSearch'
 import MapInfo from './MapInfo'
 
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
-
 
 class ChargerMap extends Component {
     constructor(props) {
@@ -17,11 +17,13 @@ class ChargerMap extends Component {
             selectedPlace: {}
         }
 
+        // bind functions
         this.markers = this.markers.bind(this)
         this.onMapClick = this.onMapClick.bind(this)
         this.onMarkerClick = this.onMarkerClick.bind(this)
     }
 
+    // fetch the chargers
     componentDidMount() {
         fetch('http://34.239.125.70/api/chargers/get')
             .then(res => res.json())
@@ -30,6 +32,7 @@ class ChargerMap extends Component {
             })
     }
 
+    // if map gets clicked, then stop displaying the infowindow
     onMapClick(props) {
         if (this.state.showingInfoWindow) {
             this.setState({
@@ -39,6 +42,7 @@ class ChargerMap extends Component {
         }
     }
 
+    // display the info window when marker is clicked
     onMarkerClick(props, marker, e) {
         this.setState({
             selectedPlace: props,
@@ -47,6 +51,7 @@ class ChargerMap extends Component {
         })
     }
 
+    // place all the markers on the map using map()
     markers() {
         return this.state.data.map((marker, index) => { 
             return <Marker 
