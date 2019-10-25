@@ -5,7 +5,7 @@ class MapSearch extends Component {
         super(props)
         this.state = {
             query: "",
-            value: "",
+            value: "name",
             data: [],
             filteredData: [],
         }
@@ -50,7 +50,9 @@ class MapSearch extends Component {
 
     listItems() {
         return this.state.filteredData.map((charger, index) => {
-            return <li key={index}>{charger.name}</li>
+            return <li 
+                
+                key={index}>{charger.name}</li>
         })
     }
 
@@ -74,8 +76,7 @@ class MapSearch extends Component {
         return (
             <div id='form'>
                 <form>
-                    <select value={this.state.value} defaultValue="name" onChange={this.handleSelectChange}>
-                        <option>Search by...</option>
+                    <select value={this.state.value} onChange={this.handleSelectChange}>
                         <option value="name">Charger name</option>
                         <option value="location">Charger location</option>
                     </select> <br />

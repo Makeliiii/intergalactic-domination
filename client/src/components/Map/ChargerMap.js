@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react'
 
 import MapSearch from './MapSearch'
+import MapInfo from './MapInfo'
 
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
 
@@ -18,6 +19,7 @@ class ChargerMap extends Component {
 
         this.markers = this.markers.bind(this)
         this.onMapClick = this.onMapClick.bind(this)
+        this.onMarkerClick = this.onMarkerClick.bind(this)
     }
 
     componentDidMount() {
@@ -37,6 +39,14 @@ class ChargerMap extends Component {
         }
     }
 
+    onMarkerClick(props, marker, e) {
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        })
+    }
+
     markers() {
         return this.state.data.map((marker, index) => { 
             return <Marker 
@@ -45,18 +55,13 @@ class ChargerMap extends Component {
                 name={marker.name}
                 location={marker.location}
                 type={marker.type}
-                inUse={marker.inUse ? "Available" : "Taken"}
+                inUse={marker.inUse ? "Taken" : "Available"}
+                free={marker.free ? "Yes" : "No"}
                 position={{
                     lat: marker.latitude.$numberDecimal,
                     lng: marker.longitude.$numberDecimal
                 }}
-                onClick={(props, marker, e) => {
-                    this.setState({
-                        selectedPlace: props,
-                        activeMarker: marker,
-                        showingInfoWindow: true
-                    })
-                }} />
+                onClick={this.onMarkerClick} />
         })
     }
 
@@ -84,10 +89,13 @@ class ChargerMap extends Component {
                             <p>Location: {this.state.selectedPlace.location}</p>
                             <p>Type: {this.state.selectedPlace.type}</p>
                             <p>Status: {this.state.selectedPlace.inUse}</p>
+                            <p>Free: {this.state.selectedPlace.free}</p>
                     </InfoWindow>
                 </Map>
-
-                <MapSearch />
+                <div id="listAndInfo">
+                    <MapInfo />
+                    <MapSearch />
+                </div>
             </div>
         )
     }
